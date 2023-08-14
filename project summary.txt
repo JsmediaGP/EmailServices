@@ -1,0 +1,10 @@
+I want a service that connects and send mails using sendgrid. 
+It should provide API to be able to send to either one or multiple people.
+It should use a very fine template with pictures and all. 
+The email contents should be like a welcome to skills forge email.
+Note: I need a db record of every email being sent
+
+
+
+
+
