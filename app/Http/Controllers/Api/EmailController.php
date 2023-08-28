@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Mail\EmailSend;
+use App\Mail\testingmail;
 use App\Models\emailrecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,58 +20,51 @@ class EmailController extends Controller
     
     public function sendEmail(Request $request)
     {
-        // $recipient = $request->input('recipient');
+        $validatedData = Validator::make($request->all(), [
+            'recipient_email' => 'required',
+            'email_template' => 'required',
+        ]);
+        if($validatedData->fails()){
+            return response()->json([
+                'status'=>"Error",
+                'message'=> $validatedData->messages()
+            ]);
+        }else{
+            $validatedData = $validatedData->validated();
+           
 
-        // $message = $request->input('message');
-       
-        // Mail::to($recipient)->send(new EmailSend($message));
+            $recipientEmails = explode(',', $validatedData['recipient_email']);
+            $messageBody = $validatedData['email_template'];
 
-        // $record = new emailrecord([
-        //     'recipient_email' => $recipient,
-        //     'email_template' => $message,
-        //     'time_sent' => now(),
-        // ]);
-        // $record->save();
+            foreach ($recipientEmails as $recipient) {
+                $recipient = trim($recipient);
+                
+            
+            Mail::to($recipient)->send(new testingmail($messageBody));
+           // Mail::to($recipient)->send(new Gmailservice($messageBody));
+            
+                
+                $emailrecord = new emailrecord([
+                    'recipient_email' => $recipient,
+                    'email_template' => $messageBody,
+                    'time_sent' => now(),
+                ]);
+                $emailrecord->save();
+            }
+            return response()->json(['message' => 'Email sent and details saved.']);
 
-        // return response()->json(['message' => 'Email sent and record saved']);
+        }
+        
+     
 
 
 
-//====================================================================================================
-      // Validate input
-      $details = Validator::make($request->all(), [
-        'recipient_email' => 'required|email',
-        'email_template' => 'required',
-    ]);
-    if($details->fails()){
 
-        return response()->json($details->messages());
-    
-    }else{
-              // Create a new email instance
-    $email = new EmailSend($request->email_template);
-
-    // Send the email
-    Mail::to($request->recipient_email)->send($email);
- 
-    emailrecord::create([
-        'recipient_email' => $request->recipient_email,
-        'email_template' => $request->email_template,
-        'time_sent'=>now(),
-    ]);
-
-    return response()->json(['message' => 'Email sent and details saved.']);
        
     }
-    
-  
-
-
-       
-    //}
 
  }
    
 
-}
+
 

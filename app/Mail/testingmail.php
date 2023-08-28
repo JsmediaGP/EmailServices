@@ -9,16 +9,24 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+
+
 class testingmail extends Mailable
 {
+ 
+   
     use Queueable, SerializesModels;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    private string $recipientEmail;
+    private string $email_template;
+    public function __construct(string $email_template)
     {
-        //
+        //$this->recipientEmail = $recipientEmail;
+        $this->email_template = $email_template;
     }
 
     /**
@@ -27,7 +35,7 @@ class testingmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Testingmail',
+            subject: 'Welcome to SkillsForge',
         );
     }
 
@@ -37,7 +45,9 @@ class testingmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.emailtemplate',
+            with: ['email_template'=> $this->email_template,                  
+                ],
         );
     }
 

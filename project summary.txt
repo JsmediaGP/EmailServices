@@ -5,6 +5,3 @@ The email contents should be like a welcome to skills forge email.
 Note: I need a db record of every email being sent
 
 
-
-
-

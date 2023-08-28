@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('emailrecords', function (Blueprint $table) {
             $table->id();
             $table->string('recipient_email');
-            $table->string('email_template');
+            $table->string('email_template', 5000);
             $table->timestamp('time_sent')->nullable();
             $table->timestamps();
         });
