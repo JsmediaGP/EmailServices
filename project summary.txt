@@ -5,3 +5,5 @@ The email contents should be like a welcome to skills forge email.
 Note: I need a db record of every email being sent
 
 
+example message body 
+Certainly! Here's a short and welcoming message for new sign-ups: Welcome aboard! 🚀 We're thrilled to have you as part of our community. Get ready for an amazing journey with us. If you ever need assistance or have any questions, don't hesitate to reach out. Happy exploring!

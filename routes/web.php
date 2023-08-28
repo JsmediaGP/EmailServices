@@ -19,17 +19,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/sendmail', function () {
-    Mail::to('jgraphics73@gmail.com')->send(new EmailSend());
-
-    // $record = new EmailSend([
-    //     'recipient_email' => $recipient,
-    //     'email_template' => $body,
-    //     'time_sent' => now(),
-    // ]);
-    // $record->save();
-
-    return response('Email Sent');
-});
-
