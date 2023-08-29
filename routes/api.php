@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
+Route::get('/all-mails', [EmailController::class, 'viewAllMails']);

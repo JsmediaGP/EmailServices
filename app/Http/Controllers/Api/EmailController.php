@@ -53,14 +53,26 @@ class EmailController extends Controller
             }
             return response()->json(['message' => 'Email sent and details saved.']);
 
+        }   
+    }
+
+    function viewAllMails(){
+        $allemails= emailrecord::latest()->get();
+
+        if($allemails){
+            return response()->json([
+                'status'=> "success",
+                'data'=> $allemails,
+            ]);
+        }
+        else{
+            return response()->json([
+
+                'status'=> "Error",
+                'message'=> "No Mail sent yet."
+            ]);
         }
         
-     
-
-
-
-
-       
     }
 
  }
