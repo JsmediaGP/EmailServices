@@ -14,13 +14,13 @@ This Laravel project provides an API for sending emails to multiple recipients u
 1. Clone the repository to your local machine:
 
  
-   git clone https://github.com/your-username/your-laravel-email-project.git
+   git clone https://github.com/JsmediaGP/EmailServices.git
 
 
 2. Navigate to the project directory:
 
  
-   cd your-laravel-email-project
+   cd EmailServices
 
 
 3. Install the project dependencies using Composer:
